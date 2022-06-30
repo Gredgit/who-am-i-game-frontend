@@ -101,7 +101,7 @@ function answerQuestion(player, id, question) {
 function leaveGame(player, id) {
   axios({
     method: 'delete',
-    url: `/api/v1/games/${id}/answer`,
+    url: `/api/v1/games/${id}/leave`,
     headers: { 'X-Player': player },
   });
 }
