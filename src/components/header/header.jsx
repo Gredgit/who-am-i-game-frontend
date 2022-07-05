@@ -1,22 +1,31 @@
 import GameTitle from '../game-title/game-title';
 import Btn from '../btn/btn';
-import LeaveGameModal from '../modals/leave-game/leave-game';
+import LeaveGameModal from '../modals/leave-game';
 import CountdownTimer from '../timer/timer-countdown/timer-countdown';
 import clsx from 'clsx';
 import { useState } from 'react';
 import './header.scss';
-import CreateNewLobbyModal from '../modals/create-new-lobby/create-new-lobby';
+import CreateNewLobbyModal from '../modals/create-new-lobby';
+import { GAME_LOBBY } from '../../constants/constants';
+import { useNavigate } from 'react-router-dom';
 
-function Header({ type }) {
-  const [displayModal, setDisplayModal] = useState(false);
-  const [showCreateModal, setShowCreateModal] = useState(false);
+function Header({ type, lobby, startGame }) {
+  const [leaveModalActive, setLeaveModalActive] = useState(false);
+  const [createModalActive, setCreateModalActive] = useState(false);
+  const navigate = useNavigate();
+
+  const createNewLobbySubmit = (event) => {
+    event.preventDefault();
+    setCreateModalActive(false);
+    navigate(GAME_LOBBY);
+  };
 
   return (
     <header className="game-header">
       <GameTitle className={'small'} />
       {type === 'game-lobby' && (
         <>
-          <div>SUGGEST A CHARACTER</div>
+          <div className="game-header__title">SUGGEST A CHARACTER</div>
           <div className="game-header__timer-wrapper">
             <CountdownTimer
               inLobby={clsx({ 'in-lobby': type === 'game-lobby' })}
@@ -31,15 +40,16 @@ function Header({ type }) {
           <div className="create-btn-wrapper">
             <Btn
               className="btn-green-solid"
-              onClick={() => setShowCreateModal(true)}
+              onClick={() => setCreateModalActive(true)}
             >
               CREATE NEW LOBBY
             </Btn>
           </div>
 
           <CreateNewLobbyModal
-            displayModal={showCreateModal}
-            setDisplayModal={setShowCreateModal}
+            active={createModalActive}
+            onSubmit={createNewLobbySubmit}
+            onCancel={() => setCreateModalActive(false)}
           />
         </>
       )}
@@ -49,15 +59,30 @@ function Header({ type }) {
           <div className="game-header__leave-btn-wrapper">
             <Btn
               className={['btn-pink-solid', 'btn-rounded']}
-              onClick={() => setDisplayModal(true)}
+              onClick={() => setLeaveModalActive(true)}
             >
               LEAVE GAME
             </Btn>
           </div>
+
           <LeaveGameModal
-            showModal={displayModal}
-            setModalActive={setDisplayModal}
+            active={leaveModalActive}
+            onCancel={() => setLeaveModalActive(false)}
           />
+        </>
+      )}
+
+      {type === 'lobby' && (
+        <>
+          {startGame && (
+            <CountdownTimer
+              time={15}
+              inLobby
+              small="v-small"
+              timeClassName="colored"
+            />
+          )}
+          <div className="game-header__title">LOBBY:{lobby}</div>
         </>
       )}
     </header>

@@ -4,21 +4,39 @@ import avatar03 from '../assets/avatars/avatar03.png';
 import avatar04 from '../assets/avatars/avatar04.png';
 
 export const currentUser = {
-  id: 1,
-  name: 'GreenDean',
-  iconSrc: avatar01,
+  player: {
+    id: 1,
+  },
+  nickname: 'GreenDean',
+  avatar: 'avatar01',
   character: 'Shrack',
 };
 
 export const users = [
   {
-    id: 2,
-    name: 'Khalilormous',
-    iconSrc: avatar02,
+    player: {
+      id: 2,
+    },
+    nickname: 'Khalilormous',
+    avatar: 'avatar02',
     character: 'Orlando Bloom',
   },
-  { id: 3, name: 'KayPee', iconSrc: avatar03, character: 'Geoffrey Rush' },
-  { id: 4, name: 'Ted_Read', iconSrc: avatar04, character: 'Dwayne Johnson' },
+  {
+    player: {
+      id: 3,
+    },
+    nickname: 'KayPee',
+    avatar: 'avatar03',
+    character: 'Geoffrey Rush',
+  },
+  {
+    player: {
+      id: 4,
+    },
+    nickname: 'Ted_Read',
+    avatar: 'avatar04',
+    character: 'Dwayne Johnson',
+  },
 ];
 
 export const history = [

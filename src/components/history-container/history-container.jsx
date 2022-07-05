@@ -6,7 +6,7 @@ import AnswerForm from '../answer-form/answer-form';
 import MessageBlock from '../message-block/message-block';
 import './history-container.scss';
 import { users } from '../../store/mock-data';
-import { answerQuestion, askQuestion } from '../../services/games-service';
+// import { answerQuestion, askQuestion } from '../../services/games-service';
 import {
   ANSWERING,
   ASKING,

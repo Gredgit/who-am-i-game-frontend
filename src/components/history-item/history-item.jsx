@@ -16,11 +16,12 @@ function HistoryItem(props) {
       <div className="history_item_icons_box">
         {users.map((user) => (
           <AnswerIcon
-            key={user.id}
+            key={user.player.id}
             user={user}
             status={
               answers
-                ? answers.find((answer) => answer.userId === user.id).status
+                ? answers.find((answer) => answer.userId === user.player.id)
+                    .status
                 : null
             }
           />

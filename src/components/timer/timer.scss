@@ -1,3 +1,5 @@
+@import '../../styles/colors';
+
 .timer {
   display: flex;
   justify-content: center;
@@ -28,5 +30,12 @@
 
   .v-small {
     display: none;
+  }
+
+  .colored {
+    color: $btn-pink;
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 39px;
   }
 }

@@ -1,4 +1,5 @@
 @import '../../styles/colors.scss';
+@import '../../styles/mixins';
 
 .game-header {
   width: 1270px;
@@ -22,6 +23,10 @@
 
   &__timer-wrapper {
     width: 177px;
+  }
+
+  &__title {
+    @include font-big;
   }
 }
 

@@ -1,7 +1,7 @@
 import GameTitle from '../../components/game-title/game-title';
 import Btn from '../../components/btn/btn';
 import Timer from '../../components/timer/timer';
-import LeaveGameModal from '../../components/modals/leave-game/leave-game';
+import LeaveGameModal from '../../components/modals/leave-game';
 import ScreenWrapper from '../../components/wrappers/screen-wrapper/screen-wrapper';
 import { useState, useEffect, useContext } from 'react';
 import GameDataContext from '../../contexts/game-data-context';
@@ -12,7 +12,7 @@ import './loading.scss';
 
 function Loading() {
   const { gameData, setGameData, playerId } = useContext(GameDataContext);
-  const [modalActive, setModalActive] = useState(false);
+  const [leaveModalActive, setLeaveModalActive] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,12 +42,15 @@ function Loading() {
       <div className="loading__button-wrappper">
         <Btn
           className={['btn-pink-solid']}
-          onClick={() => setModalActive(true)}
+          onClick={() => setLeaveModalActive(true)}
         >
           LEAVE GAME
         </Btn>
       </div>
-      <LeaveGameModal showModal={modalActive} setModalActive={setModalActive} />
+      <LeaveGameModal
+        active={leaveModalActive}
+        onCancel={() => setLeaveModalActive(false)}
+      />
     </ScreenWrapper>
   );
 }

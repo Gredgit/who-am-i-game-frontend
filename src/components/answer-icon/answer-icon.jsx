@@ -2,10 +2,9 @@ import './answer-icon.scss';
 import { ReactComponent as ReactCheck } from '../../assets/svg/check.svg';
 import { ReactComponent as ReactQuestion } from '../../assets/svg/question-mark.svg';
 import { ReactComponent as ReactCross } from '../../assets/svg/x.svg';
+import clsx from 'clsx';
 
-function AnswerIcon(props) {
-  const userIconSrc = props.user.iconSrc;
-  const status = props.status;
+function AnswerIcon({ status, user }) {
   let icon = null;
   const classes = 'icon_status';
 
@@ -22,7 +21,7 @@ function AnswerIcon(props) {
 
   return (
     <div className="icon_wrapper">
-      <img src={userIconSrc} alt="icon" />
+      <div className={clsx('player__card-avatar', user.avatar)}></div>
       {status && icon}
     </div>
   );

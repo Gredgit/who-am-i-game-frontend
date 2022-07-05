@@ -1,16 +1,18 @@
 import LobbyItem from './lobby-item/lobby-item';
 import Header from '../../components/header/header';
 import ScreenWrapper from '../../components/wrappers/screen-wrapper/screen-wrapper';
-import JoinLobbyModal from '../../components/modals/join-lobby-modal/join-lobby-modal';
+import JoinLobbyModal from '../../components/modals/join-lobby-modal';
 import TableColumnTitle from './table-column-title/table-column-title';
 import Btn from '../../components/btn/btn';
 import {
+  GAME_LOBBY,
   NUMBER_OF_PLAYERS_FILTER,
   THEME_FILTER,
   TYPE_FILTER,
 } from '../../constants/constants';
 import { useState } from 'react';
 import './main-lobby.scss';
+import { useNavigate } from 'react-router-dom';
 
 function MainLobby() {
   const [themeFilter, setThemeFilter] = useState(THEME_FILTER);
@@ -21,7 +23,8 @@ function MainLobby() {
   const [numberDropdown, setNumberDropdown] = useState(false);
   const [typeDropdown, setTypeDropdown] = useState(false);
 
-  const [joinLobbyModal, setJoinLobbyModal] = useState(false);
+  const [joinLobbyActive, setJoinLobbyActive] = useState(false);
+  const navigate = useNavigate();
 
   const resetFiltersHandler = () => {
     setThemeFilter((state) =>
@@ -45,6 +48,11 @@ function MainLobby() {
       setNumberDropdown(false);
       setTypeDropdown(false);
     }
+  };
+
+  const joinLobbySubmit = () => {
+    setJoinLobbyActive(false);
+    navigate(GAME_LOBBY);
   };
 
   return (
@@ -98,14 +106,15 @@ function MainLobby() {
               theme="Actors"
               numberOfPlayers={`${num}/12 players`}
               type={num % 3 === 0 ? 'Public' : 'Private'}
-              setJoinLobbyModal={setJoinLobbyModal}
+              setJoinLobbyActive={setJoinLobbyActive}
             />
           ))}
         </tbody>
       </table>
       <JoinLobbyModal
-        displayModal={joinLobbyModal}
-        setDisplayModal={setJoinLobbyModal}
+        active={joinLobbyActive}
+        onSubmit={joinLobbySubmit}
+        onCancel={() => setJoinLobbyActive(false)}
       />
     </ScreenWrapper>
   );

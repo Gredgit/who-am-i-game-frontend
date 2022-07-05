@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import '../timer.scss';
 import { INACTIVE } from '../../../constants/constants';
 
-function CountdownTimer({ inLobby, time = 60, small, paused }) {
+function CountdownTimer({ inLobby, time = 60, small, timeClassName, paused }) {
   const [seconds, setSeconds] = useState(time);
   const navigate = useNavigate();
 
@@ -30,7 +30,9 @@ function CountdownTimer({ inLobby, time = 60, small, paused }) {
   return (
     <div className="timer">
       <p className={clsx('timer__start', [inLobby, small])}>GAME START</p>
-      <div className={clsx('timer__time', { 'time-small': small })}>
+      <div
+        className={clsx('timer__time', { 'time-small': small }, timeClassName)}
+      >
         {convertTime(seconds)}
       </div>
     </div>

@@ -15,7 +15,7 @@ import AfterLogin from './AfterLogin';
 import BeforeLogin from './BeforeLogin';
 
 function Homepage() {
-  const { gameData, setGameData, playerId } = useContext(GameDataContext);
+  const { gameData } = useContext(GameDataContext);
   const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
 

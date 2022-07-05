@@ -1,7 +1,7 @@
 import Btn from '../../components/btn/btn';
 import PlayerCard from '../../components/player-card/player-card';
-import LeaveGameModal from '../../components/modals/leave-game/leave-game';
-import SelectCharacterModal from '../../components/modals/select-character/select-character';
+import LeaveGameModal from '../../components/modals/leave-game';
+import SelectCharacterModal from '../../components/modals/select-character';
 import Header from '../../components/header/header';
 import ScreenWrapper from '../../components/wrappers/screen-wrapper/screen-wrapper';
 import { useContext, useEffect, useState } from 'react';
@@ -9,12 +9,12 @@ import { useNavigate } from 'react-router-dom';
 import { PLAY, PROCESSING_QUESTION, READY } from '../../constants/constants';
 import './lobby.scss';
 import GameDataContext from '../../contexts/game-data-context';
-import { findGameById } from '../../services/games-service';
+import { findGameById, suggestCharacter } from '../../services/games-service';
 
 function Lobby() {
-  const { gameData, setGameData, playerId } = useContext(GameDataContext);
-  const [showLeaveModal, setLeaveModalActive] = useState(false);
-  const [showSuggestModal, setSuggestModal] = useState(false);
+  const { gameData, playerId, setGameData } = useContext(GameDataContext);
+  const [leaveModalActive, setLeaveModalActive] = useState(false);
+  const [suggestModalActive, setSuggestModalActive] = useState(false);
   const [suggestBtn, setSuggestBtn] = useState(true);
   const navigate = useNavigate();
 
@@ -34,16 +34,25 @@ function Lobby() {
     }
   }, [gameData, navigate]);
 
-  const players = gameData.data.players.map((player, index) => ({
-    nickname: `Player ${index + 1}`,
-    avatar: `avatar0${index + 1}`,
-    ...player,
-  }));
+  const players =
+    gameData.data.players &&
+    gameData.data.players.map((player, index) => ({
+      nickname: player.player.name || `Player ${index + 1}`,
+      avatar: `avatar0${index + 1}`,
+      ...player,
+    }));
 
   const currentPlayer =
     players && players.find((player) => player.player.id === playerId);
   const playersWithoutYou =
     players && players.filter((player) => player.player.id !== playerId);
+
+  const submitCharacter = (event, playerName, characterName) => {
+    event.preventDefault();
+    suggestCharacter(playerId, gameData.data.id, playerName, characterName);
+    setSuggestModalActive(false);
+    setSuggestBtn(false);
+  };
 
   return (
     <ScreenWrapper>
@@ -51,18 +60,20 @@ function Lobby() {
         <Header type="game-lobby" />
         <div className="input-screen__player">
           <div className="input-screen__player-card-wrapper">
-            {currentPlayer && (
-              <PlayerCard
-                avatarClassName={currentPlayer.avatar}
-                name={currentPlayer.nickname}
-                playerStatusClassName={
-                  currentPlayer.state === READY ? 'yes' : 'unsure'
-                }
-                isYou
-              />
-            )}
+            {currentPlayer &&
+              (console.log('players', gameData.data.players),
+              (
+                <PlayerCard
+                  avatarClassName={currentPlayer.avatar}
+                  name={currentPlayer.nickname}
+                  playerStatusClassName={
+                    currentPlayer.state === READY ? 'yes' : 'unsure'
+                  }
+                  isYou
+                />
+              ))}
             {playersWithoutYou ? (
-              playersWithoutYou.map((player, index) => (
+              playersWithoutYou.map((player) => (
                 <PlayerCard
                   key={player.player.id}
                   avatarClassName={player.avatar}
@@ -81,15 +92,12 @@ function Lobby() {
               <Btn
                 className={['btn-green-solid']}
                 onClick={() => {
-                  setSuggestModal(true);
+                  setSuggestModalActive(true);
                 }}
               >
                 Suggest a character
               </Btn>
             )}
-
-            <div className="input-screen__demarcation"></div>
-
             <Btn
               className={['btn-pink-solid']}
               onClick={() => setLeaveModalActive(true)}
@@ -99,14 +107,14 @@ function Lobby() {
           </div>
         </div>
         <LeaveGameModal
-          showModal={showLeaveModal}
-          setModalActive={setLeaveModalActive}
+          active={leaveModalActive}
+          onCancel={() => setLeaveModalActive(false)}
         />
         <SelectCharacterModal
-          player={currentPlayer.nickname}
-          displayModal={showSuggestModal}
-          setDisplayModal={setSuggestModal}
-          setSuggestBtn={setSuggestBtn}
+          player={currentPlayer && currentPlayer.nickname}
+          active={suggestModalActive}
+          onSubmit={submitCharacter}
+          onCancel={() => setSuggestModalActive(false)}
         />
       </div>
     </ScreenWrapper>

@@ -1,0 +1,158 @@
+@import '../../styles/colors';
+@import '../../styles/mixins';
+
+.modal {
+  @include font-normal;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 800px;
+  padding: 40px;
+  background-color: $modals-background;
+  border-radius: 6px;
+  box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: $font-black;
+  z-index: 100;
+
+  &.leave-modal {
+    z-index: 200;
+  }
+
+  h3 {
+    margin: 0;
+    line-height: 39px;
+  }
+
+  p {
+    margin: 0;
+    text-align: start;
+  }
+
+  .title-timer {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  &__title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__title-container_title {
+    @include font-big;
+  }
+
+  &__title-container_close-btn {
+    height: 18px;
+    width: 18px;
+    background-image: url('../../assets/icons/cross.svg');
+    background-size: 17.5px;
+    background-repeat: no-repeat;
+    background-color: $modals-background;
+    border: none;
+    cursor: pointer;
+  }
+
+  &__timer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $primary-background-blue;
+  }
+
+  &__timer-container_name {
+    font-weight: 500;
+    font-size: 16px;
+    margin: 0px;
+  }
+
+  &__timer-container_timer {
+    font-weight: 900;
+    font-size: 24px;
+    margin: 0px;
+  }
+
+  .modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  &__select-field,
+  &__input-field {
+    width: 100%;
+    max-width: 720px;
+    padding: 32px;
+    box-sizing: border-box;
+    border: 4px solid $font-gray;
+    border-radius: 8px;
+    font-size: 24px;
+    font-weight: 500;
+
+    &.error {
+      border: 4px solid $btn-pink;
+    }
+  }
+
+  &__select-field {
+    appearance: none;
+    background: url('../../assets/icons/arrow-down.svg') no-repeat;
+    background-position: calc(100% - 32px) center;
+  }
+
+  &__checkbox {
+    align-self: flex-start;
+
+    input {
+      position: absolute;
+      opacity: 0;
+    }
+
+    label {
+      cursor: pointer;
+
+      &:before {
+        content: '';
+        display: inline-block;
+        position: relative;
+        top: 4px;
+        left: 4px;
+        width: 24px;
+        height: 24px;
+        margin-right: 20px;
+        background: url('../../assets/icons/checkbox.svg');
+      }
+
+      &.true:before {
+        background: url('../../assets/icons/checkbox-checked.svg');
+      }
+    }
+  }
+
+  &__buttons-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 32px;
+    width: 100%;
+    height: 67px;
+  }
+
+  &__cancel-btn {
+    background: $modals-background;
+    border: 4px solid $font-black;
+  }
+
+  .error-message {
+    margin-top: -24px;
+    padding-left: 27px;
+    color: $btn-pink;
+  }
+}

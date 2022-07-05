@@ -28,7 +28,7 @@ function UsersContainer({ mode, currentPlayer, players }) {
       <hr />
       <div className="users__list">
         {players ? (
-          players.map((player, index) => (
+          players.map((player) => (
             <PlayerCard
               className="in-users-container"
               key={player.player.id}

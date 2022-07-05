@@ -2,15 +2,8 @@
 @import '../../styles/colors';
 
 .main-lobby {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  flex-shrink: 1;
-  width: 1280px;
+  @include lobby-content-wrapper;
   margin-top: 20px;
-  padding: 24px;
-  background-color: $secondary-background-blue;
-  border-radius: 16px;
   overflow: auto;
 
   .table-header {
@@ -21,5 +14,9 @@
       width: 184px;
       padding: 16px 32px;
     }
+  }
+
+  .players-number {
+    text-align: left;
   }
 }

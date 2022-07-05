@@ -18,6 +18,7 @@ const WAITING = 'WAITING';
 const RESPONSE = 'RESPONSE';
 
 const MAIN_LOBBY = '/main-lobby';
+const GAME_LOBBY = '/game-lobby';
 const LOADING = '/loading';
 const LOBBY = '/lobby';
 const PLAY = '/play';
@@ -63,6 +64,7 @@ export {
   WAITING,
   RESPONSE,
   MAIN_LOBBY,
+  GAME_LOBBY,
   LOADING,
   LOBBY,
   PLAY,
