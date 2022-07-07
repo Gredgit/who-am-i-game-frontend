@@ -57,3 +57,24 @@ h1 {
 .d-none {
   display: none;
 }
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 842px;
+  gap: 32px;
+  padding-top: 32px;
+}
+
+.btn-form-wrapper {
+  display: flex;
+  gap: 32px;
+  width: 100%;
+}
+
+.subtitle {
+  font-weight: 900;
+  font-size: 24px;
+  text-transform: uppercase;
+}

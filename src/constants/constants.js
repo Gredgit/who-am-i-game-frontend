@@ -25,6 +25,11 @@ const PLAY = '/play';
 const DEFEAT = '/defeat';
 const VICTORY = '/victory';
 const INACTIVE = '/inactive';
+const CREATE_ACCOUNT = '/create-account';
+const SIGN_IN = '/sign-in';
+const RESTORE = '/restore';
+const NEW_PASSWORD = '/new-password';
+const PROFILE = '/profile';
 
 const THEME_FILTER = [
   { title: 'Actors', checked: false },
@@ -74,4 +79,9 @@ export {
   THEME_FILTER,
   NUMBER_OF_PLAYERS_FILTER,
   TYPE_FILTER,
+  CREATE_ACCOUNT,
+  SIGN_IN,
+  RESTORE,
+  NEW_PASSWORD,
+  PROFILE,
 };

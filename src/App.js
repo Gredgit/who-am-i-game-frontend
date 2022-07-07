@@ -20,8 +20,18 @@ import {
   MAIN_LOBBY,
   PLAY,
   VICTORY,
+  CREATE_ACCOUNT,
+  SIGN_IN,
+  RESTORE,
+  NEW_PASSWORD,
+  PROFILE,
 } from './constants/constants';
+import CreateAccount from './screens/create-account/create-account';
+import SignIn from './screens/signin-page/signin-page';
+import RestorePassword from './screens/restore-password/restore-password';
+import NewPassword from './screens/new-password/new-password';
 import GameLobby from './screens/game-lobby/game-lobby';
+import ProfilePage from './screens/profile-page/profile-page';
 
 function App() {
   const [gameData, setGameData] = useState({
@@ -54,6 +64,11 @@ function App() {
           <Route path={DEFEAT} element={<LostGame />} />
           <Route path={VICTORY} element={<Victory />} />
           <Route path={INACTIVE} element={<InactivityKick />} />
+          <Route path={CREATE_ACCOUNT} element={<CreateAccount />} />
+          <Route path={SIGN_IN} element={<SignIn />} />
+          <Route path={RESTORE} element={<RestorePassword />} />
+          <Route path={NEW_PASSWORD} element={<NewPassword />} />
+          <Route path={PROFILE} element={<ProfilePage />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </GameDataContext.Provider>

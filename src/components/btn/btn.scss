@@ -26,6 +26,11 @@
   color: $font-gray;
 }
 
+.btn:disabled:hover {
+  filter: brightness(100%);
+  cursor: default;
+}
+
 .btn:hover {
   filter: brightness(140%);
 }
@@ -57,6 +62,12 @@
   font-weight: 900;
   font-size: 24px;
   width: 290px;
+}
+
+.btn-blue-outline-small {
+  border: 4px solid $main-font-color;
+  background-color: $primary-background-blue;
+  color: $main-font-color;
 }
 
 .btn-pink-outline {

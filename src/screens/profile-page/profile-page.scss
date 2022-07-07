@@ -1,0 +1,14 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 592px;
+  gap: 24px;
+}
+
+.profile__avatar {
+  width: 200px;
+  height: 200px;
+  background-image: url(../../assets/avatars/profile-avatar-big.png);
+}
