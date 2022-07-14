@@ -25,4 +25,11 @@
     flex-direction: column;
     gap: 8px;
   }
+
+  .spinner-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+  }
 }

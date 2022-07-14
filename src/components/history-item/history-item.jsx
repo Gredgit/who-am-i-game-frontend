@@ -7,13 +7,13 @@ function HistoryItem(props) {
   const users = props.users;
 
   return (
-    <div className="history_item">
-      <div className={clsx('history_item_question', guess)}>
-        {guess && <span className="my_guess">My guess</span>}
-        <img src={user.iconSrc} alt="icon" />
+    <div className="history-item">
+      <div className={clsx('history-item__question', guess)}>
+        {guess && <span className="my-guess">My guess</span>}
+        <div className={clsx('history-item__avatar', user.avatar)}></div>
         <p>{question}</p>
       </div>
-      <div className="history_item_icons_box">
+      <div className="history-item__icons-box">
         {users.map((user) => (
           <AnswerIcon
             key={user.player.id}

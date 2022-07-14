@@ -12,8 +12,12 @@ function TableColumnTitle({
   children,
 }) {
   const onClickHandler = (event) => {
-    if (event.target.className.includes('table-header__column'))
+    if (
+      event.target.className.includes('table-header__column') ||
+      event.target.className.includes('icon')
+    ) {
       setDisplayDropdown((state) => !state);
+    }
   };
 
   return (

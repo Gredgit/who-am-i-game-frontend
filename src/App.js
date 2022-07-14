@@ -9,7 +9,7 @@ import Lobby from './screens/lobby/lobby';
 import GameDataContext from './contexts/game-data-context';
 import MainLobby from './screens/main-lobby/main-lobby';
 import { v4 as uuidv4 } from 'uuid';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.scss';
 import {
   DEFEAT,
@@ -34,25 +34,24 @@ import GameLobby from './screens/game-lobby/game-lobby';
 import ProfilePage from './screens/profile-page/profile-page';
 
 function App() {
-  const [gameData, setGameData] = useState({
-    data: {
-      status: null,
-    },
-  });
-  const [playerId] = useState(uuidv4());
+  const [gameData, setGameData] = useState({ status: null, players: [] });
+  const [playerId, setPlayerId] = useState(sessionStorage.playerId || uuidv4());
+
+  useEffect(() => {
+    sessionStorage.setItem('playerId', playerId);
+  }, [playerId]);
 
   function resetData() {
-    setGameData({
-      data: {
-        status: null,
-      },
-    });
+    setGameData({ status: null, players: [] });
+    sessionStorage.removeItem('gameId');
+    sessionStorage.removeItem('playerId');
+    setPlayerId(uuidv4());
   }
 
   return (
     <div className="App">
       <GameDataContext.Provider
-        value={{ gameData, setGameData, playerId, resetData }}
+        value={{ gameData, setGameData, playerId, setPlayerId, resetData }}
       >
         <Routes>
           <Route path="/" element={<Homepage />} />

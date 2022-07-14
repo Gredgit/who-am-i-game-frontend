@@ -14,11 +14,15 @@ function LeaveGameModal({ active, onCancel }) {
     return null;
   }
 
-  const submitLeaveGame = (event) => {
+  const submitLeaveGame = async (event) => {
     event.preventDefault();
-    leaveGame(playerId, gameData.data.id);
-    resetData();
-    navigate('/');
+    try {
+      await leaveGame(playerId, gameData.id);
+      resetData();
+      navigate('/');
+    } catch (error) {
+      //to do: handle errors
+    }
   };
 
   return (
