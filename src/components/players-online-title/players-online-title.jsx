@@ -11,7 +11,7 @@ function PlayersOnlineTitle() {
 
   useInterval(async () => {
     setPlayerNum((await getAllPlayersCount(playerId)).data);
-  }, 1000 * 5);
+  }, 1000);
 
   return (
     <span className="players-online">

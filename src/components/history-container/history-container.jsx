@@ -1,12 +1,11 @@
 import HistoryItem from '../history-item/history-item';
 import QuestionForm from '../question-form/question-form';
 import { useEffect, useRef, useState } from 'react';
-import { currentUser, history } from '../../store/mock-data';
+import { users, history } from '../../store/mock-data';
 import AnswerForm from '../answer-form/answer-form';
 import MessageBlock from '../message-block/message-block';
 import './history-container.scss';
-import { users } from '../../store/mock-data';
-// import { answerQuestion, askQuestion } from '../../services/games-service';
+import { answerQuestion, askQuestion } from '../../services/games-service';
 import {
   ANSWERING,
   ASKING,
@@ -14,8 +13,11 @@ import {
   RESPONSE,
   WAITING,
 } from '../../constants/constants';
+import { useContext } from 'react';
+import GameDataContext from '../../contexts/game-data-context';
 
-function HistoryContainer({ mode, setMode, playerId, gameId }) {
+function HistoryContainer({ mode, currentPlayer }) {
+  const { gameData, playerId } = useContext(GameDataContext);
   const [message, setMessage] = useState('yes');
   const [currentQuestion, setCurrentQuestion] = useState('');
   const [disabled, setDisabled] = useState(false);
@@ -32,23 +34,28 @@ function HistoryContainer({ mode, setMode, playerId, gameId }) {
     });
   });
 
-  const sendQuestionHandler = () => {
+  const sendQuestionHandler = async () => {
     if (currentQuestion !== '') {
-      history.push({ user: currentUser, question: currentQuestion });
-      // askQuestion(playerId, gameId, currentQuestion);
-
-      setCurrentQuestion('');
-      setDisabled(true);
+      history.push({ user: currentPlayer, question: currentQuestion });
+      try {
+        await askQuestion(playerId, gameData.id, currentQuestion);
+        setCurrentQuestion('');
+        setDisabled(true);
+      } catch (error) {
+        //to do: handle error
+      }
     }
   };
 
-  const handleClick = (event) => {
+  const handleClick = async (event) => {
     event.preventDefault();
     const answer = event.nativeEvent.submitter.value;
-    setMode((state) => (state === GUESSING ? WAITING : ''));
     setMessage(answer);
-
-    // answerQuestion(playerId, gameId, answer);
+    try {
+      await answerQuestion(playerId, gameData.id, answer);
+    } catch (error) {
+      //to do: handle error
+    }
   };
 
   return (

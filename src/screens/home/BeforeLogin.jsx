@@ -1,26 +1,13 @@
-import { useContext } from 'react';
 import Btn from '../../components/btn/btn';
-import GameDataContext from '../../contexts/game-data-context';
-import { createGame } from '../../services/games-service';
-import {
-  CREATE_ACCOUNT,
-  NUMBER_OF_PLAYERS,
-  SIGN_IN,
-} from '../../constants/constants';
+import { CREATE_ACCOUNT, SIGN_IN } from '../../constants/constants';
 import { useNavigate } from 'react-router-dom';
 
-function BeforeLogin({ setIsLogin }) {
-  const { setGameData, playerId } = useContext(GameDataContext);
+function BeforeLogin({ setIsLogin, createGame }) {
   const navigate = useNavigate();
 
   return (
     <>
-      <Btn
-        className={'btn-blue-outline'}
-        onClick={async () => {
-          setGameData(await createGame(playerId, NUMBER_OF_PLAYERS));
-        }}
-      >
+      <Btn className={'btn-blue-outline'} onClick={createGame}>
         PLAY QUICK GAME
       </Btn>
       <div className="dividing-line"></div>
