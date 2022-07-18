@@ -1,16 +1,9 @@
-import { useContext } from 'react';
 import Btn from '../../components/btn/btn';
-import GameDataContext from '../../contexts/game-data-context';
 import { createGame } from '../../services/games-service';
-import {
-  MAIN_LOBBY,
-  NUMBER_OF_PLAYERS,
-  PROFILE,
-} from '../../constants/constants';
+import { MAIN_LOBBY, PROFILE } from '../../constants/constants';
 import { useNavigate } from 'react-router-dom';
 
 function AfterLogin({ setIsLogin }) {
-  const { setGameData, playerId } = useContext(GameDataContext);
   const navigate = useNavigate();
 
   return (
@@ -23,12 +16,7 @@ function AfterLogin({ setIsLogin }) {
           <div className="profile__edit-icon"></div>
         </div>
       </div>
-      <Btn
-        className={'btn-blue-outline'}
-        onClick={async () => {
-          setGameData(await createGame(playerId, NUMBER_OF_PLAYERS));
-        }}
-      >
+      <Btn className={'btn-blue-outline'} onClick={createGame}>
         PLAY QUICK GAME
       </Btn>
       <Btn

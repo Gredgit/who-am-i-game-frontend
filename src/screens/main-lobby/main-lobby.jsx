@@ -41,6 +41,7 @@ function MainLobby() {
   const closeDropdown = (event) => {
     if (
       !event.target.className.includes('table-header__column') &&
+      !event.target.className.includes('icon') &&
       event.target.tagName !== 'INPUT' &&
       event.target.tagName !== 'LABEL'
     ) {

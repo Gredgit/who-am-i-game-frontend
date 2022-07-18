@@ -2,28 +2,20 @@ import clsx from 'clsx';
 import AnswerIcon from '../answer-icon/answer-icon';
 import './history-item.scss';
 
-function HistoryItem(props) {
-  const { user, question, answers, guess } = props.question;
-  const users = props.users;
-
+function HistoryItem({ avatar, question, answers, guess }) {
   return (
-    <div className="history_item">
-      <div className={clsx('history_item_question', guess)}>
-        {guess && <span className="my_guess">My guess</span>}
-        <img src={user.iconSrc} alt="icon" />
+    <div className="history-item">
+      <div className={clsx('history-item__question', guess)}>
+        {guess && <span className="my-guess">My guess</span>}
+        <div className={clsx('history-item__avatar', avatar)}></div>
         <p>{question}</p>
       </div>
-      <div className="history_item_icons_box">
-        {users.map((user) => (
+      <div className="history-item__icons-box">
+        {answers.map((answer, index) => (
           <AnswerIcon
-            key={user.player.id}
-            user={user}
-            status={
-              answers
-                ? answers.find((answer) => answer.userId === user.player.id)
-                    .status
-                : null
-            }
+            key={index}
+            avatar={answer.avatar}
+            status={answer.status || null}
           />
         ))}
       </div>

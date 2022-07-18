@@ -24,23 +24,26 @@
     overflow: hidden;
   }
 
+  &__you-label {
+    min-width: 161px;
+  }
+
   &__you-label,
   &__assigned-character {
     display: flex;
     align-items: center;
     font-size: 16px;
     font-weight: 700;
-    min-width: 160px;
     height: 51px;
     padding: 16px 32px 16px 32px;
     border-radius: 25px;
-    text-transform: uppercase;
   }
 
   &__you-label {
     background-color: $btn-green;
     color: $font-black;
     margin-right: 16px;
+    text-transform: uppercase;
   }
 
   &__assigned-character {
