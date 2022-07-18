@@ -66,7 +66,7 @@ function HistoryContainer({ mode, currentPlayer }) {
         ))}
         <div className="list_scroll_bottom" ref={bottomElement}></div>
       </div>
-      {mode === ASKING && !disabled && (
+      {mode === "ASKED" && !disabled && (
         <QuestionForm
           setCurrentQuestion={setCurrentQuestion}
           currentQuestion={currentQuestion}
