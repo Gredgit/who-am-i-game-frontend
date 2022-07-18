@@ -42,9 +42,11 @@ function PlayPage() {
                     mode={currentPlayer.state}
                     currentPlayer={currentPlayer}
                     players={playersWithoutCurrent}
-                    timer={gameData.timer}
                   />
-                  <HistoryContainer mode={currentPlayer.state} />
+                  <HistoryContainer
+                    mode={currentPlayer.state}
+                    currentPlayer={currentPlayer}
+                  />
                 </>
               )}
               <GuessCharacterModal
