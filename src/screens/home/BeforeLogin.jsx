@@ -1,15 +1,14 @@
 import Btn from '../../components/btn/btn';
 import { CREATE_ACCOUNT, SIGN_IN } from '../../constants/constants';
 import { useNavigate } from 'react-router-dom';
+import PlayQuickGameButton from './playQuickGameButton';
 
-function BeforeLogin({ setIsLogin, createGame }) {
+function BeforeLogin() {
   const navigate = useNavigate();
 
   return (
     <>
-      <Btn className={'btn-blue-outline'} onClick={createGame}>
-        PLAY QUICK GAME
-      </Btn>
+      <PlayQuickGameButton />
       <div className="dividing-line"></div>
       <Btn
         className={'btn-blue-outline'}
@@ -20,13 +19,7 @@ function BeforeLogin({ setIsLogin, createGame }) {
         CREATE ACCOUNT
       </Btn>
       <div className="text-login or">or</div>
-      <Btn
-        className={'btn-fb-blue'}
-        iconClassName={'fb'}
-        onClick={() => {
-          setIsLogin(true);
-        }}
-      >
+      <Btn className={'btn-fb-blue'} iconClassName={'fb'}>
         Continue with Facebook
       </Btn>
       <div className="dividing-line"></div>

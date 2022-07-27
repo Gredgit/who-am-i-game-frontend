@@ -11,14 +11,14 @@ const ASKING = 'ASKING';
 const ASKED = 'ASKED';
 const ANSWERING = 'ANSWERING';
 const ANSWERED = 'ANSWERED';
+const GUESSING = 'GUESSING';
+const ANSWER_GUESS = 'ANSWER_GUESS';
 const FINISHED = 'FINISHED';
 const YES = 'YES';
 const NO = 'NO';
 const NOT_SURE = 'NOT_SURE';
-const GUESSING = 'GUESSING';
 const WAITING = 'WAITING';
 const RESPONSE = 'RESPONSE';
-const LEAVING = 'LEAVING';
 
 const MAIN_LOBBY = '/main-lobby';
 const GAME_LOBBY = '/game-lobby';
@@ -33,6 +33,7 @@ const SIGN_IN = '/sign-in';
 const RESTORE = '/restore';
 const NEW_PASSWORD = '/new-password';
 const PROFILE = '/profile';
+const REDIRECT = '/email-redirect';
 
 const THEME_FILTER = [
   { title: 'Actors', checked: false },
@@ -66,14 +67,14 @@ export {
   ASKED,
   ANSWERING,
   ANSWERED,
+  GUESSING,
+  ANSWER_GUESS,
   FINISHED,
   YES,
   NO,
   NOT_SURE,
-  GUESSING,
   WAITING,
   RESPONSE,
-  LEAVING,
   MAIN_LOBBY,
   GAME_LOBBY,
   LOADING,
@@ -90,4 +91,5 @@ export {
   RESTORE,
   NEW_PASSWORD,
   PROFILE,
+  REDIRECT,
 };
